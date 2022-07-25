@@ -1,0 +1,11 @@
+{
+  "name": "signupbackend",
+  "version": "1.0.0",
+  "description": "Sign up Application with data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

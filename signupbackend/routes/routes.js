@@ -3,13 +3,14 @@ const router = express.Router();
 const signUpTemplateCopy = require("../models/SignupModels");
 
 router.post("/signup", (req, res) => {
-  const singnedUpUser = new signUpTemplateCopy({
+  const signUpUser = new signUpTemplateCopy({
     fullName: req.body.fullName,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   });
-  singnedUpUser
+
+  signUpUser
     .save()
     .then((data) => {
       res.json(data);

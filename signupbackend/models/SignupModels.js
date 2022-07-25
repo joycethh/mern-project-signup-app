@@ -11,7 +11,7 @@ const signUpTemplate = new mongoose.Schema({
   },
   email: {
     type: String,
-    reqired: true,
+    required: true,
   },
   password: {
     type: String,

@@ -1,15 +1,17 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import axios from "axios";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       fullName: "",
       username: "",
       email: "",
       password: "",
     };
+
     this.changeFullName = this.changeFullName.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
@@ -43,18 +45,47 @@ class App extends React.Component {
     });
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    const registered = {
+      fullName: this.state.fullName,
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    axios
+      .post("http://localhost:4000/app/signup", registered)
+      .then((response) => {
+        console.log(response);
+        alert(response.status + response.statusText);
+        //go back to home page
+        // window.location('/')
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    this.setState = {
+      fullName: "",
+      username: "",
+      email: "",
+      password: "",
+    };
+  }
+
   render() {
     return (
       <div>
         <div className="container">
           <div className="form-div">
-            <form>
+            <form onSubmit={this.onSubmit}>
               <input
                 type="text"
                 placeholder="Full Name"
                 onChange={this.changeFullName}
                 value={this.state.fullName}
-                className="form-control form group"
+                className="form-control form-group"
               />
               <input
                 type="text"
@@ -91,5 +122,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;

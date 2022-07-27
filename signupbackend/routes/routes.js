@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const signUpTemplateCopy = require("../models/SignupModels");
+const bcrypt = require("bcrypt");
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
+  const saltPassword = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(req.body.password, saltPassword);
   const signUpUser = new signUpTemplateCopy({
     fullName: req.body.fullName,
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: hashPassword,
   });
 
   signUpUser
